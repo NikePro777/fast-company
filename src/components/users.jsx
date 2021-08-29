@@ -6,7 +6,23 @@ const Users = () => {
   const handleDelete = (userId) => {};
   const renderPhrase = (number) => {};
 
-  return <h1>Users</h1>;
+  return (
+    <>
+      <h1>To you tussit</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Качества</th>
+            <th scope="col">Профессия</th>
+            <th scope="col">Встретился раз</th>
+            <th scope="col">Оценка</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </>
+  );
 };
 
 export default Users;
