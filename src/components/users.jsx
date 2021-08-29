@@ -3,8 +3,18 @@ import api from "../API";
 
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
+  // setUsers(users.json);
+  // console.log(users.name);
+
   const handleDelete = (userId) => {};
   const renderPhrase = (number) => {};
+  // console.log(users);
+
+  const renderTabl = () => {
+    return users.map((item) => <tr>{item.name}</tr>);
+  };
+
+  console.log(renderTabl);
 
   return (
     <>
@@ -19,7 +29,8 @@ const Users = () => {
             <th scope="col">Оценка</th>
           </tr>
         </thead>
-        <tbody></tbody>
+
+        <tbody>{renderTabl()}</tbody>
       </table>
     </>
   );
