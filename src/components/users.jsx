@@ -11,10 +11,10 @@ const Users = () => {
   // console.log(users);
 
   const renderTabl = () => {
-    return users.map((item) => <tr>{item.name}</tr>);
+    return users.map((item) => <th>{item.name}</th>);
   };
 
-  console.log(renderTabl);
+  // console.log(renderTabl);
 
   return (
     <>
@@ -30,7 +30,9 @@ const Users = () => {
           </tr>
         </thead>
 
-        <tbody>{renderTabl()}</tbody>
+        <tbody>
+          <tr>{renderTabl()}</tr>
+        </tbody>
       </table>
     </>
   );
