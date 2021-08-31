@@ -11,7 +11,18 @@ const Users = () => {
   // console.log(users);
 
   const renderTabl = () => {
-    return users.map((item) => <th>{item.name}</th>);
+    return users.map((user) => (
+      <tr>
+        <td key={user._id}>{user.name}</td>
+        <td>{user.qualities.map((item) => item.name)}</td>
+        <td key={user.profession._id}>{user.profession.name}</td>
+        <td key={user._id}>{user.completedMeetings}</td>
+        <td key={user._id}>{user.rate}</td>
+        <td>
+          <button>delete</button>
+        </td>
+      </tr>
+    ));
   };
 
   // console.log(renderTabl);
@@ -30,9 +41,7 @@ const Users = () => {
           </tr>
         </thead>
 
-        <tbody>
-          <tr>{renderTabl()}</tr>
-        </tbody>
+        <tbody>{renderTabl()}</tbody>
       </table>
     </>
   );
