@@ -12,8 +12,8 @@ const Users = () => {
 
   const renderTabl = () => {
     return users.map((user) => (
-      <tr>
-        <td key={user._id}>{user.name}</td>
+      <tr key={user._id}>
+        <td>{user.name}</td>
         <td>
           {user.qualities.map((item) => {
             const getColors = () => {
@@ -22,12 +22,16 @@ const Users = () => {
               return colors;
             };
 
-            return <span className={getColors()}>{item.name}</span>;
+            return (
+              <span key={item._id} className={getColors()}>
+                {item.name}
+              </span>
+            );
           })}
         </td>
-        <td key={user.profession._id}>{user.profession.name}</td>
-        <td key={user._id}>{user.completedMeetings}</td>
-        <td key={user._id}>{user.rate}</td>
+        <td>{user.profession.name}</td>
+        <td>{user.completedMeetings}</td>
+        <td>{user.rate}</td>
         <td>
           <button className="badge bg-danger">delete</button>
         </td>
