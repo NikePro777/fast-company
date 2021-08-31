@@ -7,7 +7,11 @@ const Users = () => {
   // console.log(users.name);
 
   const handleDelete = (userId) => {
-    console.log(userId);
+    let timed = users.filter((item) => {
+      return item._id !== userId.id;
+    });
+    console.log(timed);
+    setUsers(timed);
   };
   const renderPhrase = (number) => {};
   // console.log(users);
@@ -37,7 +41,7 @@ const Users = () => {
         <td>
           <button
             key={user._id}
-            onClick={handleDelete(button.key)}
+            onClick={() => handleDelete({ id: user._id })}
             className="badge bg-danger"
           >
             delete
