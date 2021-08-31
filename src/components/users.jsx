@@ -6,7 +6,9 @@ const Users = () => {
   // setUsers(users.json);
   // console.log(users.name);
 
-  const handleDelete = (userId) => {};
+  const handleDelete = (userId) => {
+    console.log(userId);
+  };
   const renderPhrase = (number) => {};
   // console.log(users);
 
@@ -33,7 +35,13 @@ const Users = () => {
         <td>{user.completedMeetings}</td>
         <td>{user.rate}</td>
         <td>
-          <button className="badge bg-danger">delete</button>
+          <button
+            key={user._id}
+            onClick={handleDelete(button.key)}
+            className="badge bg-danger"
+          >
+            delete
+          </button>
         </td>
       </tr>
     ));
@@ -52,6 +60,7 @@ const Users = () => {
             <th scope="col">Профессия</th>
             <th scope="col">Встретился раз</th>
             <th scope="col">Оценка</th>
+            <th scope="col"></th>
           </tr>
         </thead>
 
