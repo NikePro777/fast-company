@@ -14,12 +14,22 @@ const Users = () => {
     return users.map((user) => (
       <tr>
         <td key={user._id}>{user.name}</td>
-        <td>{user.qualities.map((item) => item.name)}</td>
+        <td>
+          {user.qualities.map((item) => {
+            const getColors = () => {
+              let colors = "m-1 badge bg-";
+              colors += item.color;
+              return colors;
+            };
+
+            return <span className={getColors()}>{item.name}</span>;
+          })}
+        </td>
         <td key={user.profession._id}>{user.profession.name}</td>
         <td key={user._id}>{user.completedMeetings}</td>
         <td key={user._id}>{user.rate}</td>
         <td>
-          <button>delete</button>
+          <button className="badge bg-danger">delete</button>
         </td>
       </tr>
     ));
