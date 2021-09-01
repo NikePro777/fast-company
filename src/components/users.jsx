@@ -3,18 +3,40 @@ import api from "../API";
 
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
-  // setUsers(users.json);
-  // console.log(users.name);
 
   const handleDelete = (userId) => {
     let timed = users.filter((item) => {
       return item._id !== userId.id;
     });
-    console.log(timed);
     setUsers(timed);
   };
-  const renderPhrase = (number) => {};
-  // console.log(users);
+
+  const renderColor = (number) => {
+    let color = "m-2 badge bg-";
+    if (number === 0) {
+      color = color + "danger";
+    } else {
+      color = color + "primary";
+    }
+    return color;
+  };
+
+  const renderPhrase = (number) => {
+    let phrase = " с тобой сегодня";
+    if (
+      number < 10 &&
+      (number % 10 === 2 || number % 10 === 3 || number % 10 === 4)
+    ) {
+      phrase = " человека тусанут" + phrase;
+    } else {
+      phrase = " человек тусанет" + phrase;
+    }
+    if (number === 0) {
+      phrase = "Никто с тобой не тусанет";
+      return phrase;
+    }
+    return number + phrase;
+  };
 
   const renderTabl = () => {
     return users.map((user) => (
@@ -27,7 +49,6 @@ const Users = () => {
               colors += item.color;
               return colors;
             };
-
             return (
               <span key={item._id} className={getColors()}>
                 {item.name}
@@ -51,11 +72,11 @@ const Users = () => {
     ));
   };
 
-  // console.log(renderTabl);
-
   return (
     <>
-      <h1>To you tussit</h1>
+      <h1 style={{ fontSize: 20 }} className={renderColor(users.length)}>
+        {renderPhrase(users.length)}
+      </h1>
       <table className="table">
         <thead>
           <tr>
