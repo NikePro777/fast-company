@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-import api from "../api/index";
+import User from "./user";
 
-const Users = () => {
-  const [users, setUsers] = useState(api.users.fetchAll());
-
-  const handleDelete = (userId) => {
-    let timed = users.filter((item) => {
-      return item._id !== userId.id;
-    });
-    setUsers(timed);
-  };
-
+const Users = ({ users }) => {
   const renderColor = (number) => {
     let color = "m-2 badge bg-";
     if (number === 0) {
@@ -19,23 +10,6 @@ const Users = () => {
       color = color + "primary";
     }
     return color;
-  };
-
-  const renderPhrase = (number) => {
-    let phrase = " с тобой сегодня";
-    if (
-      number < 10 &&
-      (number % 10 === 2 || number % 10 === 3 || number % 10 === 4)
-    ) {
-      phrase = " человека тусанут" + phrase;
-    } else {
-      phrase = " человек тусанет" + phrase;
-    }
-    if (number === 0) {
-      phrase = "Никто с тобой не тусанет";
-      return phrase;
-    }
-    return number + phrase;
   };
 
   const renderTabl = () => {
