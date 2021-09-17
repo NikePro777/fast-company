@@ -1,7 +1,7 @@
 import React from "react";
 
-const BookMark = () => {
-  return console.log("я подключен!");
+const BookMark = ({ status, ...rest }) => {
+  return null;
 };
 
 export default BookMark;

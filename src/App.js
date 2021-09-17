@@ -49,7 +49,11 @@ const App = () => {
         renderPhrase={renderPhrase}
         renderColor={renderColor}
       />
-      <Users users={users} handleDelete={handleDelete} />
+      <Users
+        users={users}
+        handleDelete={handleDelete}
+        handleToggleBookMark={handleToggleBookMark}
+      />
     </>
   );
 };
