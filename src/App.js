@@ -40,7 +40,16 @@ const App = () => {
     return color;
   };
 
-  const handleToggleBookMark = (id) => {};
+  const handleToggleBookMark = (id) => {
+    console.log(id);
+    // let color = "bi bi-bookmark";
+    // if (number === 0) {
+    //   color = color + "danger";
+    // } else {
+    //   color = color + "primary";
+    // }
+    // return color;
+  };
 
   return (
     <>

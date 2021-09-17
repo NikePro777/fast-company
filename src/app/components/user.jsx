@@ -2,7 +2,7 @@ import React from "react";
 import BookMark from "./bookmark";
 import Qualitie from "./qualitie";
 
-const User = ({ users, handleDelete }) => {
+const User = ({ users, handleDelete, ...rest }) => {
   const renderTabl = () => {
     return users.map((user) => (
       <tr key={user._id}>
@@ -13,7 +13,7 @@ const User = ({ users, handleDelete }) => {
         <td>{user.profession.name}</td>
         <td>{user.completedMeetings}</td>
         <td>{user.rate}</td>
-        <td>{<BookMark />}</td>
+        <td>{<BookMark id={user._id} {...rest} />}</td>
         <td>
           <button
             key={user._id}
