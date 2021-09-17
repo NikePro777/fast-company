@@ -42,13 +42,14 @@ const App = () => {
 
   const handleToggleBookMark = (id) => {
     console.log(id);
-    // let color = "bi bi-bookmark";
-    // if (number === 0) {
-    //   color = color + "danger";
-    // } else {
-    //   color = color + "primary";
-    // }
-    // return color;
+    const marks = "bi bi-bookmark";
+    users._id.marks = marks;
+    const [status, setStatus] = useState(false);
+    {
+      setStatus(!status);
+      status ? (marks = marks + "-full") : (marks = marks);
+    }
+    return status;
   };
 
   return (
