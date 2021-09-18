@@ -5,6 +5,11 @@ import api from "./app/api/index";
 
 const App = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
+  const [status, setStatus] = useState(false);
+  let timing = users.filter((item) => {
+    item.status = false;
+    return item;
+  });
 
   const handleDelete = (userId) => {
     let timed = users.filter((item) => {
@@ -42,14 +47,22 @@ const App = () => {
 
   const handleToggleBookMark = (id) => {
     console.log(id);
-    const marks = "bi bi-bookmark";
-    users._id.marks = marks;
-    const [status, setStatus] = useState(false);
-    {
-      setStatus(!status);
-      status ? (marks = marks + "-full") : (marks = marks);
-    }
-    return status;
+
+    let acc = timing.find((item) => {
+      console.log(item._id);
+      return item._id == id;
+    });
+    console.log(acc);
+    // timing.status = !timing.status;
+    // console.log(timing);
+    // const marks = "bi bi-bookmark";
+    // users._id.marks = marks;
+    // const [status, setStatus] = useState(false);
+    // {
+    //   setStatus(!status);
+    //   status ? (marks = marks + "-full") : (marks = marks);
+    // }
+    return console.log("1");
   };
 
   return (
