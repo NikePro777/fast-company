@@ -5,12 +5,7 @@ import api from "./app/api/index";
 
 const App = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
-  // let [status, setStatus] = useState(false);
-  let timing = users.filter((item) => {
-    item.status = false;
-    return item;
-  });
-  let acc;
+
   const handleDelete = (userId) => {
     let timed = users.filter((item) => {
       return item._id !== userId.id;
@@ -45,13 +40,23 @@ const App = () => {
     return color;
   };
 
+  // acc = timing.findIndex((item) => {
+  //   let value = Object.values(id);
+  //   return item._id === value[0];
+  // });
+  // timing[acc].status = !timing[acc].status;
+  // console.log(timing[acc].status);
+  // return timing[acc].status;
+
   const handleToggleBookMark = (id) => {
-    acc = timing.findIndex((item) => {
-      let value = Object.values(id);
-      return item._id === value[0];
-    });
-    timing[acc].status = !timing[acc].status;
-    return timing[acc].status;
+    setUsers(
+      users.map((user) => {
+        if (user._id === id) {
+          user.status = !user.status;
+        }
+        return user;
+      })
+    );
   };
 
   return (
@@ -65,7 +70,6 @@ const App = () => {
         users={users}
         handleDelete={handleDelete}
         handleToggleBookMark={handleToggleBookMark}
-        status={timing[acc].status}
       />
     </>
   );

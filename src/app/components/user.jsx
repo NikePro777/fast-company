@@ -13,7 +13,7 @@ const User = ({ users, handleDelete, ...rest }) => {
         <td>{user.profession.name}</td>
         <td>{user.completedMeetings}</td>
         <td>{user.rate}</td>
-        <td>{<BookMark id={user._id} {...rest} />}</td>
+        <td>{<BookMark users={users} id={user._id} {...rest} />}</td>
         <td>
           <button
             key={user._id}
