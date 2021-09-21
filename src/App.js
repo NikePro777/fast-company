@@ -18,22 +18,21 @@ const App = () => {
     setUsers(
       users.map((user) => {
         if (user._id === id) {
-          user.status = !user.status;
+          return { ...user, bookmark: !user.bookmark };
         }
         return user;
       })
     );
   };
-
   return (
-    <>
+    <div>
       <SearchStatus length={users.length} />
       <Users
         users={users}
         handleDelete={handleDelete}
         handleToggleBookMark={handleToggleBookMark}
       />
-    </>
+    </div>
   );
 };
 

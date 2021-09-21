@@ -2,34 +2,41 @@ import React from "react";
 import BookMark from "./bookmark";
 import Qualitie from "./qualitie";
 
-const User = ({ users, handleDelete, ...rest }) => {
-  const renderTabl = () => {
-    return users.map((user) => (
-      <tr key={user._id}>
-        <td>{user.name}</td>
-        <td>
-          <Qualitie user={user} />
-        </td>
-        <td>{user.profession.name}</td>
-        <td>{user.completedMeetings}</td>
-        <td>{user.rate}</td>
-        <td>{<BookMark users={users} id={user._id} {...rest} />}</td>
-        <td>
-          <button
-            key={user._id}
-            onClick={() => handleDelete({ id: user._id })}
-            className="badge bg-danger"
-          >
-            delete
-          </button>
-        </td>
-      </tr>
-    ));
-  };
+const User = ({
+  _id,
+  name,
+  qualities,
+  profession,
+  completedMeetings,
+  rate,
+  handleDelete,
+  bookmark,
+  handleToggleBookMark,
+}) => {
   return (
-    <>
-      <tbody>{renderTabl()}</tbody>
-    </>
+    <tr key={_id}>
+      <td>{name}</td>
+      <td>
+        {qualities.map((qual) => (
+          <Qualitie key={qual._id} {...qual} />
+        ))}
+      </td>
+      <td>{profession.name}</td>
+      <td>{completedMeetings}</td>
+      <td>{rate}/5</td>
+      <td>
+        <BookMark status={bookmark} onClick={() => handleToggleBookMark(_id)} />
+      </td>
+      <td>
+        <button
+          key={_id}
+          onClick={() => handleDelete({ id: _id })}
+          className="badge bg-danger"
+        >
+          delete
+        </button>
+      </td>
+    </tr>
   );
 };
 
