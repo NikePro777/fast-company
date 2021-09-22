@@ -3,7 +3,7 @@ import Pagination from "./pagination";
 import User from "./user";
 
 const Users = ({ users, ...rest }) => {
-  const pageSize = 4;
+  const pageSize = 15;
 
   const handlePageChange = (pageIndex) => {
     console.log("page", pageIndex);
