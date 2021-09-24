@@ -3,6 +3,7 @@ import { paginate } from "../utils/paginate";
 import PropTypes from "prop-types";
 import Pagination from "./pagination";
 import User from "./user";
+import GroupList from "./groupList";
 
 const Users = ({ users: allUsers, ...rest }) => {
   const pageSize = 4;
@@ -14,6 +15,7 @@ const Users = ({ users: allUsers, ...rest }) => {
   const users = paginate(allUsers, currentPage, pageSize);
   return (
     <>
+      <GroupList />
       <table className="table">
         <thead>
           <tr>
