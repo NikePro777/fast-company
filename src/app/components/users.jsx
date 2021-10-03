@@ -17,11 +17,13 @@ const Users = ({ users: allUsers, ...rest }) => {
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
   };
-  const users = paginate(allUsers, currentPage, pageSize);
-
   const handleProfessionSelect = (item) => {
     setSelectedProf(item);
   };
+  const filteredUsers = selectedProf
+    ? allUsers.filter((user) => user.profession === selectedProf)
+    : allUsers;
+  const usersCrop = paginate(filteredUsers, currentPage, pageSize);
   return (
     <>
       {professions && (
@@ -44,7 +46,7 @@ const Users = ({ users: allUsers, ...rest }) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {usersCrop.map((user) => (
             <User key={user._id} {...rest} {...user} />
           ))}
         </tbody>
