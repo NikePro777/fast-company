@@ -5,6 +5,7 @@ import Pagination from "./pagination";
 import User from "./user";
 import GroupList from "./groupList";
 import api from "../api";
+// import { noConflict } from "lodash";
 
 const Users = ({ users: allUsers, ...rest }) => {
   const pageSize = 4;
@@ -24,14 +25,22 @@ const Users = ({ users: allUsers, ...rest }) => {
     ? allUsers.filter((user) => user.profession === selectedProf)
     : allUsers;
   const usersCrop = paginate(filteredUsers, currentPage, pageSize);
+  const clearFilter = () => {
+    setSelectedProf();
+  };
   return (
     <>
       {professions && (
-        <GroupList
-          selectedItem={selectedProf}
-          items={professions}
-          onItemSelect={handleProfessionSelect}
-        />
+        <>
+          <GroupList
+            selectedItem={selectedProf}
+            items={professions}
+            onItemSelect={handleProfessionSelect}
+          />
+          <button className="btn btn-secondary mt-2" onClick={clearFilter}>
+            Очистить
+          </button>
+        </>
       )}
       <table className="table">
         <thead>
