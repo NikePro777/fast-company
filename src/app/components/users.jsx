@@ -12,9 +12,11 @@ const Users = ({ users: allUsers, ...rest }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [professions, setProfessions] = useState();
   const [selectedProf, setSelectedProf] = useState();
+
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));
   }, []);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedProf]);

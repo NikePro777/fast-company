@@ -8,9 +8,10 @@ const GroupList = ({
   onItemSelect,
   selectedItem
 }) => {
+  console.log("items=", items);
   return (
     <ul className="list-group">
-      {Object.keys(items).map((item) => (
+      {items.forEach((item) => (
         <li
           key={items[item][valueProperty]}
           className={
