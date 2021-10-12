@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Users from "./app/components/users";
 import api from "./app/api/index";
 
 const App = () => {
-  const [users, setUsers] = useState(api.users.fetchAll());
+  const [users, setUsers] = useState();
+
+  useEffect(() => {
+    api.users.fetchAll().then((data) => setUsers(data));
+  }, []);
 
   const handleDelete = (userId) => {
     setUsers(
@@ -24,13 +28,11 @@ const App = () => {
     );
   };
   return (
-    <div>
-      <Users
-        users={users}
-        handleDelete={handleDelete}
-        handleToggleBookMark={handleToggleBookMark}
-      />
-    </div>
+    <Users
+      users={users}
+      handleDelete={handleDelete}
+      handleToggleBookMark={handleToggleBookMark}
+    />
   );
 };
 
