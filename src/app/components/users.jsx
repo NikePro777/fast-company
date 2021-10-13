@@ -19,7 +19,7 @@ const Users = ({ users: allUsers, ...rest }) => {
           JSON.stringify(user.profession) === JSON.stringify(selectedProf)
       )
     : allUsers;
-
+  const count = filteredUsers.length;
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));
   }, []);
@@ -35,7 +35,6 @@ const Users = ({ users: allUsers, ...rest }) => {
     setSelectedProf(item);
   };
 
-  const count = filteredUsers.length;
   const usersCrop = paginate(filteredUsers, currentPage, pageSize);
   const clearFilter = () => {
     setSelectedProf();

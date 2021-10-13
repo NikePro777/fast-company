@@ -28,11 +28,15 @@ const App = () => {
     );
   };
   return (
-    <Users
-      users={users}
-      handleDelete={handleDelete}
-      handleToggleBookMark={handleToggleBookMark}
-    />
+    <>
+      {users && (
+        <Users
+          users={users}
+          handleDelete={handleDelete}
+          handleToggleBookMark={handleToggleBookMark}
+        />
+      )}
+    </>
   );
 };
 
