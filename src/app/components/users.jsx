@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { paginate } from "../utils/paginate";
 import PropTypes from "prop-types";
 import Pagination from "./pagination";
-import User from "./user";
 import GroupList from "./groupList";
 import api from "../api";
 import SearchStatus from "./searchStatus";
+import UserTable from "./usersTable";
 
 const Users = ({ users: allUsers, ...rest }) => {
   const pageSize = 2;
@@ -55,26 +55,7 @@ const Users = ({ users: allUsers, ...rest }) => {
       )}
       <div className="d-flex flex-column">
         <SearchStatus length={count} />
-        {count > 0 && (
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Качества</th>
-                <th scope="col">Профессия</th>
-                <th scope="col">Встретился раз</th>
-                <th scope="col">Оценка</th>
-                <th scope="col">Избранное</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {usersCrop.map((user) => (
-                <User key={user._id} {...rest} {...user} />
-              ))}
-            </tbody>
-          </table>
-        )}
+        {count > 0 && <UserTable users={usersCrop} {...rest} />}
         <div className="d-flex justify-content-center">
           <Pagination
             itemsCount={count}
