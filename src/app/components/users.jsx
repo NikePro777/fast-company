@@ -66,7 +66,7 @@ const Users = ({ users: allUsers, ...rest }) => {
           <UserTable
             onSort={handleSort}
             users={usersCrop}
-            currentSort={sortBy}
+            selectedSort={sortBy}
             {...rest}
           />
         )}
