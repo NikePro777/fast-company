@@ -12,7 +12,7 @@ const App = () => {
   const handleDelete = (userId) => {
     setUsers(
       users.filter((item) => {
-        return item._id !== userId.id;
+        return item._id !== userId;
       })
     );
   };
@@ -32,8 +32,8 @@ const App = () => {
       {users && (
         <Users
           users={users}
-          handleDelete={handleDelete}
-          handleToggleBookMark={handleToggleBookMark}
+          onDelete={handleDelete}
+          onToggleBookMark={handleToggleBookMark}
         />
       )}
     </>
