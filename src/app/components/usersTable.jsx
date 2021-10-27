@@ -12,7 +12,6 @@ const UserTable = ({
   onDelete,
   ...rest
 }) => {
-  console.log(rest);
   const columns = {
     name: { path: "name", name: "Имя" },
     qualities: { name: "Качества" },

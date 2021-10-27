@@ -11,6 +11,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
       onSort({ path: item, order: "asc" });
     }
   };
+
   return (
     <thead>
       <tr>
@@ -19,7 +20,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
             key={column}
             onClick={
               columns[column].path
-                ? () => handleSort(columns[column].path)
+                ? () => handleSort(columns[column].path) && columns[column]
                 : undefined
             }
             {...{ role: columns[column].path && "button" }}
