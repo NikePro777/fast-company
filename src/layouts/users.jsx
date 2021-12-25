@@ -115,6 +115,7 @@ const Users = () => {
   return "loading...";
 };
 Users.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
+  userId: PropTypes.any
 };
 export default Users;
