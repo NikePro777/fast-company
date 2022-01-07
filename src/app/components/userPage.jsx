@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from "react";
-import api from "../app/api";
-import Qualitie from "../app/components/qualitie";
+import api from "../api";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
+import QualitiesList from "./qualitiesList";
 
-const User = (id) => {
+const UserPage = ({ userId }) => {
   const history = useHistory();
   const [user, setUser] = useState();
-  const back = () => {
+  const handleClick = () => {
     history.push("/users");
   };
   useEffect(() => {
-    api.users.getById(id.id).then((data) => setUser(data));
+    api.users.getById(userId).then((data) => setUser(data));
   }, []);
-  console.log(user);
   if (user) {
     return (
       <>
         <h1>{user.name}</h1>
         <h2>Профессия: {user.profession.name}</h2>
-        <span>
-          {user.qualities.map((user) => (
-            <Qualitie key={user._id} {...user} />
-          ))}
-        </span>
+        <QualitiesList qualities={user.qualities} />
         <h6>completed Meetings {user.completedMeetings}</h6>
         <h2>Rate: {user.rate}</h2>
         <button
           onClick={() => {
-            back();
+            handleClick();
           }}
         >
           Все пользователи
@@ -38,8 +34,8 @@ const User = (id) => {
     return <h1>loading...</h1>;
   }
 };
-// User.propTypes = {
-//   id: PropTypes.object
-// };
-// (<h1>{user.name}</h1>)
-export default User;
+UserPage.propTypes = {
+  userId: PropTypes.string.isRequired
+};
+
+export default UserPage;
