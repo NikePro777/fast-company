@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import TextField from "../app/components/textField";
+import { validator } from "../app/utils/validator";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
-  const [, setErrors] = useState();
+  const [errors, setErrors] = useState({});
   const handleChange = ({ target }) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
+  };
+
+  const validatorConfig = {
+    email: {
+      isRequired: { message: "Электронная почта должна быть заполнена" }
+    },
+    password: {
+      isRequired: { message: "Парль должен быть заполнен" }
+    }
   };
 
   useEffect(() => {
@@ -13,12 +23,7 @@ const Login = () => {
   }, [data]);
 
   const validate = () => {
-    const errors = {};
-    for (const fieldName in data) {
-      if (data[fieldName].trim() === "") {
-        errors[fieldName] = `${fieldName} обязательно для заполнения`;
-      }
-    }
+    const errors = validator(data, validatorConfig);
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -37,6 +42,7 @@ const Login = () => {
         name="email"
         value={data.email}
         onChange={handleChange}
+        error={errors.email}
       />
       <TextField
         label="Пароль"
@@ -44,6 +50,7 @@ const Login = () => {
         name="password"
         value={data.password}
         onChange={handleChange}
+        error={errors.password}
       />
       <button type="">Suubmit</button>
     </form>
