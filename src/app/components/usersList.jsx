@@ -61,7 +61,7 @@ const UsersList = () => {
   };
 
   if (users) {
-    const filteredUsers = selectedProf
+    let filteredUsers = selectedProf
       ? users.filter(
           (user) =>
             JSON.stringify(user.profession) === JSON.stringify(selectedProf)
@@ -74,6 +74,16 @@ const UsersList = () => {
     const clearFilter = () => {
       setSelectedProf();
     };
+
+    function handleSearch(e) {
+      // e.preventDefault();
+
+      filteredUsers = selectedProf;
+      const searchRefExp = e.target.value
+        ? users.filter((user) => searchRefExp(user))
+        : users;
+      console.log(e.target.value);
+    }
 
     return (
       <div className="d-flex">
@@ -91,6 +101,11 @@ const UsersList = () => {
         )}
         <div className="d-flex flex-column">
           <SearchStatus length={count} />
+
+          <form>
+            <input type="text" onChange={handleSearch} />
+          </form>
+
           {count > 0 && (
             <UserTable
               onSort={handleSort}
@@ -115,7 +130,7 @@ const UsersList = () => {
   return "loading...";
 };
 UsersList.propTypes = {
-  users: PropTypes.array.isRequired,
+  users: PropTypes.array,
   userId: PropTypes.any
 };
 export default UsersList;
