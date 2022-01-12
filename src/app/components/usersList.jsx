@@ -18,8 +18,15 @@ const UsersList = () => {
 
   const [users, setUsers] = useState();
 
+  const [oldUsers, setOldUsers] = useState(); //
+  const [search, setSearch] = useState(""); //
+
   useEffect(() => {
     api.users.fetchAll().then((data) => setUsers(data));
+  }, []);
+
+  useEffect(() => {
+    api.users.fetchAll().then((data) => setOldUsers(data)); //
   }, []);
 
   const handleDelete = (userId) => {
@@ -54,37 +61,41 @@ const UsersList = () => {
   };
   const handleProfessionSelect = (item) => {
     setSelectedProf(item);
+    setSearch("");
+    setUsers(oldUsers);
   };
 
   const handleSort = (item) => {
     setSortBy(item);
   };
 
+  function handleSearch({ target }) {
+    setSearch(target.value);
+    setSelectedProf();
+    const searchUsers = target.value
+      ? oldUsers.filter((user) =>
+          user.name.toLowerCase().includes(target.value)
+        )
+      : oldUsers;
+    setUsers(searchUsers);
+
+    console.log(target);
+  }
+
   if (users) {
-    let filteredUsers = selectedProf
+    const filteredUsers = selectedProf
       ? users.filter(
           (user) =>
             JSON.stringify(user.profession) === JSON.stringify(selectedProf)
         )
       : users;
-
+    // handleSearch({ value: "" });
     const count = filteredUsers.length;
     const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
     const usersCrop = paginate(sortedUsers, currentPage, pageSize);
     const clearFilter = () => {
       setSelectedProf();
     };
-
-    function handleSearch(e) {
-      // e.preventDefault();
-
-      filteredUsers = selectedProf;
-      const searchRefExp = e.target.value
-        ? users.filter((user) => searchRefExp(user))
-        : users;
-      console.log(e.target.value);
-    }
-
     return (
       <div className="d-flex">
         {professions && (
@@ -103,7 +114,7 @@ const UsersList = () => {
           <SearchStatus length={count} />
 
           <form>
-            <input type="text" onChange={handleSearch} />
+            <input type="text" onChange={handleSearch} value={search} />
           </form>
 
           {count > 0 && (
