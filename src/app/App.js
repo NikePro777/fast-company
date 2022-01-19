@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "./layouts/login";
 import Main from "./layouts/main";
-import NavBar from "./app/components/navBar";
+import NavBar from "./components/ui/navBar";
 import Quation from "./layouts/users";
 
 const App = () => {
