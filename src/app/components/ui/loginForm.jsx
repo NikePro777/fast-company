@@ -41,37 +41,30 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-6 offset-md-3 shadow p-4">
-          <h3 className="mb-4">Login</h3>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              label="Электроенная почта"
-              name="email"
-              value={data.email}
-              onChange={handleChange}
-              error={errors.email}
-            />
-            <TextField
-              label="Пароль"
-              type="password"
-              name="password"
-              value={data.password}
-              onChange={handleChange}
-              error={errors.password}
-            />
-            <button
-              className="btn btn-primary w-100 mx-auto"
-              type=""
-              disabled={!isValid}
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <TextField
+        label="Электроенная почта"
+        name="email"
+        value={data.email}
+        onChange={handleChange}
+        error={errors.email}
+      />
+      <TextField
+        label="Пароль"
+        type="password"
+        name="password"
+        value={data.password}
+        onChange={handleChange}
+        error={errors.password}
+      />
+      <button
+        className="btn btn-primary w-100 mx-auto"
+        type=""
+        disabled={!isValid}
+      >
+        Submit
+      </button>
+    </form>
   );
 };
 
