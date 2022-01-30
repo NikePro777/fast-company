@@ -2,8 +2,15 @@ import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import api from "../../api";
+import SelectField from "../common/form/selectField";
+import RadioField from "../common/form/radioField";
 const RegisterForm = () => {
-  const [data, setData] = useState({ email: "", password: "", profession: "" });
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    profession: "",
+    sex: "male"
+  });
   const [professions, setProfession] = useState([]);
   const [errors, setErrors] = useState({});
   useEffect(() => {
@@ -24,6 +31,11 @@ const RegisterForm = () => {
       isCapitalSymbol: { message: "Минимум одна заглавная буква" },
       isContainDigit: { message: "Минимум одну цифра" },
       min: { message: "Минимум 8 символов", value: 8 }
+    },
+    profession: {
+      isRequired: {
+        message: "Обязательно выберете вашу профессию"
+      }
     }
   };
 
@@ -31,6 +43,9 @@ const RegisterForm = () => {
     validate();
   }, [data]);
 
+  useEffect(() => {
+    console.log(professions);
+  }, [professions]);
   const validate = () => {
     const errors = validator(data, validatorConfig);
     setErrors(errors);
@@ -62,32 +77,24 @@ const RegisterForm = () => {
         onChange={handleChange}
         error={errors.password}
       />
-      <div className="mb-4">
-        <label htmlFor="validationCustom04" className="form-label">
-          State
-        </label>
-        <select
-          className="form-select"
-          id="validationCustom04"
-          name="profession"
-          value={data.profession}
-          onChange={handleChange}
-        >
-          <option selected disabled value="">
-            Choose...
-          </option>
-          {professions &&
-            Object.keys(professions).map((professionName) => (
-              <option
-                value={professions[professionName]._id}
-                key={professions[professionName]._id}
-              >
-                {professions[professionName].name}
-              </option>
-            ))}
-        </select>
-        <div className="invalid-feedback">Please select a valid state.</div>
-      </div>
+      <SelectField
+        onChange={handleChange}
+        options={professions}
+        defaultOption="Choose ..."
+        error={errors.profession}
+        value={data.profession}
+        label="Выберите вашу профессию"
+      />
+      <RadioField
+        options={[
+          { name: "Male", value: "male" },
+          { name: "Female", value: "female" },
+          { name: "Other", value: "other" }
+        ]}
+        value={data.sex}
+        name="sex"
+        onChange={handleChange}
+      />
       <button
         className="btn btn-primary w-100 mx-auto"
         type=""
