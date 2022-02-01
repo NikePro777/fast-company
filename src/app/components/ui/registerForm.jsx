@@ -4,6 +4,7 @@ import TextField from "../common/form/textField";
 import api from "../../api";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
+import Select from "react-select";
 const RegisterForm = () => {
   const [data, setData] = useState({
     email: "",
@@ -11,10 +12,12 @@ const RegisterForm = () => {
     profession: "",
     sex: "male"
   });
+  const [qualities,setQualities] = useState({})
   const [professions, setProfession] = useState([]);
   const [errors, setErrors] = useState({});
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfession(data));
+    api.qualities.fetchAll().then((data) => setQualities(data))
   }, []);
 
   const handleChange = ({ target }) => {
@@ -43,9 +46,6 @@ const RegisterForm = () => {
     validate();
   }, [data]);
 
-  useEffect(() => {
-    console.log(professions);
-  }, [professions]);
   const validate = () => {
     const errors = validator(data, validatorConfig);
     setErrors(errors);
@@ -95,6 +95,7 @@ const RegisterForm = () => {
         name="sex"
         onChange={handleChange}
       />
+      <Select isMulti options={} className='basic-multi-select' classNamePrefix='select' onChange={handleChange}/>
       <button
         className="btn btn-primary w-100 mx-auto"
         type=""
