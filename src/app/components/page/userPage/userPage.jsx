@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../api";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Qualities from "../../ui/qualities";
 
@@ -8,7 +8,19 @@ const UserPage = ({ userId }) => {
   const history = useHistory();
   const [user, setUser] = useState();
   const handleClick = () => {
-    history.push("/users");
+    const { userId } = history;
+    // history.push("/users/edit");
+    // <UserPage userId={userId} />
+    return (
+      <Link
+        className="nav-link "
+        userID={userId}
+        aria-current="page"
+        to="/users/:userId/edit"
+      >
+        Users
+      </Link>
+    );
   };
   useEffect(() => {
     api.users.getById(userId).then((data) => setUser(data));
@@ -26,7 +38,7 @@ const UserPage = ({ userId }) => {
             handleClick();
           }}
         >
-          Все пользователи
+          Изменить
         </button>
       </>
     );
