@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "./layouts/login";
 import Main from "./layouts/main";
 import NavBar from "./components/ui/navBar";
-import Quation from "./layouts/users";
+import Users from "./layouts/users";
 // import UserEdit from "./components/page/userEdit";
 
 const App = () => {
@@ -11,8 +11,7 @@ const App = () => {
     <div>
       <NavBar />
       <Switch>
-        {/* <Route path="/users/userId/edit" component={UserEdit} /> */}
-        <Route path="/users/:userId?/:edit?" component={Quation} />
+        <Route path="/users/:userId?/:edit?" component={Users} />
         <Route path="/login/:type?" component={Login} />
         <Route path="/" exact component={Main} />
         <Redirect to="/" />
